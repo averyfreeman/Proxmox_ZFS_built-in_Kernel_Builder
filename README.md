@@ -1,6 +1,21 @@
-# zfs kernel builder
 
-I've updated this repo to build kernel v6 using Ubuntu 24.04
+In 2021, I wrote a script to pacakge the linux kernel with modules for `zfs` built-in, so additional software to support the filesystem typically installed via `dkms`, `initrd` or `kmod` package become unnecessary,  as long as you're using the zfs kernel. It was called
+### zfs kernel builder
+
+but I've made some changes and split it into pieces. This one is:
+# DEB-ZFS-kernel 
+      (appropriate, right?)
+---
+
+This update uses kernels versioned _6 to 7_ (presumably)
+It's currently tested kernels `6.9` & `6.10-rc4`, and 
+`zfs-2.2.4`- since older revisions of `zfs` are not compatible with kernels newer than release `6.7`.
+
+The script is now encapsulated in a build system using Ubuntu
+24.04 for an, and is more specific to the distro it's building
+packages for, although it still needs to build a `tar` regardless, and you can still build `rpms` with it if you want
+
+I start   
 Also a good match for Proxmox, as Proxmox uses Ubuntu kernels
 I've included a `.config` file  from the zen kernel in build dir
 if you want to use your own `.config`, replace it before building
