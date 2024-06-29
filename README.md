@@ -1,25 +1,36 @@
-# Ubuntu ZFS kernel builder - 
+# Proxmox ZFS built-in kernel builder: 
 ---
-#### builds kernel that supports ZFS by default 
+#### Containerized build system for kernels that support ZFS by default 
 
 I've updated this repo to build kernel v6 using Ubuntu 24.04. They're
-a good match for Proxmox, since Proxmox tracks Ubuntu's kernel dev tree.
+a good match for Proxmox, since Proxmox tracks Ubuntu's kernels closely:  
+The two are identical except for the name and a few patches linked below.
+
 I've included a `.config` file from zen kernel on Arch in `build` dir:
 if you want to use your own `.config`, replace it before building, or
 pull your current config from `/usr/lib/modules/$(uname -r)/.config` or
 `zcat /proc/config.gz > .config` (even works inside build container). 
 
-Codebase for Proxmox PVE kernel: [https://github.com/proxmox/pve-kernel](https://github.com/proxmox/pve-kernel)
+Codebase for Ubuntu/Proxmox PVE kernel: [https://github.com/proxmox/pve-kernel](https://github.com/proxmox/pve-kernel)
 See (specifically) patches: [https://github.com/proxmox/pve-kernel/tree/master/patches/kernel](https://github.com/proxmox/pve-kernel/tree/master/patches/kernel) 
 
-The build system is entirely encapsulated in a docker container,
-so you don't have to install any local dependencies other than Docker.
-If you'd rather run the image without the rest of the build environment, 
-an image is available from [docker://averyfreeman/zfs-kernel-builder](docker://averyfreeman/zfs-kernel-builder),
-however customization not possible using image alone (read-only).
+This build system I've created is entirely encapsulated in a docker container,
+so users don't have to install the plethora of dependencies required to build
+a kernel, and instead only need to install Docker (Podman, Nerdctl, etc.)
+If you'd rather run the image by itself, without downloading the rest of the
+build environment, the image is available from:
+
+[docker://averyfreeman/zfs-kernel-builder](docker://averyfreeman/zfs-kernel-builder)
+
+However, due to their read-only nature, customization not possible using image alone.
+You can, however, still use your own `.config` file, or whatever else could be 
+referenced through the `build` folder (right now, `.config` is all that's supported).
 
       if you have suggestions, please submit a PR.
 
+
+# This is a simple project with a singular purpose: 
+#### to build a kernel that supports the ZFS filesystem without any additional configuration
 ---
 
 ## The stability of zfs as an in-tree module
