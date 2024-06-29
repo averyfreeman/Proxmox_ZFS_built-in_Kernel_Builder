@@ -11,7 +11,7 @@ See (specifically) patches: [https://github.com/proxmox/pve-kernel/tree/master/p
 
 This build system I've created is entirely encapsulated in a docker container, so users don't have to install the plethora of dependencies required to build a kernel, and instead only need to install Docker (Podman, Nerdctl, etc.) If you'd rather run the image by itself, without downloading the rest of the build environment, the image is available from:
 
-[docker://averyfreeman/zfs-kernel-builder](docker://averyfreeman/zfs-kernel-builder)
+[docker://averyfreeman/proxmox-zfs-kernel-builder](docker://averyfreeman/proxmox-zfs-kernel-builder)
 
 However, due to their read-only nature, customization not possible using image alone. You can, however, still use your own `.config` file, or whatever else could be referenced through the `build` folder (right now, `.config` is all that's supported).
 
